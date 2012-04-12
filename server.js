@@ -3,9 +3,9 @@ var http = require('http')
 http.createServer(onRequest).listen(8888);
 
 function onRequest(request, response){
+	writeToConsoleWrapper(writeToConsole, "Request received");
 	response.writeHead(200, {"Content-Type": "text/plain"});
 	response.write("Hello World");
-	writeToConsoleWrapper(writeToConsole, "this is now in a named method!");
 	response.end();
 }
 
@@ -18,3 +18,5 @@ function writeToConsoleWrapper(aFunction, word)
 {
 	aFunction(word);
 }
+
+writeToConsoleWrapper(writeToConsole, "Server started.");
