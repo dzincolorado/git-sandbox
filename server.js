@@ -1,11 +1,20 @@
 var http = require('http')
+var url = require('url')
 
-function start(){
+function start(route, handle){
 	function onRequest(request, response){
-		writeToConsoleWrapper(writeToConsole, "Request received");
-		response.writeHead(200, {"Content-Type": "text/plain"});
-		response.write("Hello World");
-		response.end();
+		
+		if(processFavIcon(request, response))
+		{
+			var pathname = url.parse(request.url).pathname;
+			writeToConsoleWrapper(writeToConsole, "Request for " + pathname + " received");
+
+			route(handle, pathname);
+
+			response.writeHead(200, {"Content-Type": "text/plain"});
+			response.write("Hello World");
+		}
+			response.end();
 	}
 
 	http.createServer(onRequest).listen(8888);
@@ -22,4 +31,18 @@ function writeToConsole(word)
 function writeToConsoleWrapper(aFunction, word)
 {
 	aFunction(word);
+}
+
+function processFavIcon(request, response)
+{
+	if(request.url == '/favicon.ico')
+	{
+		response.writeHead(200, {'Content-Type' : 'image/x-icon'});
+		response.end();
+		writeToConsoleWrapper(writeToConsole, 'favIcon handled');
+
+		return false;
+	}
+
+	return true;
 }
