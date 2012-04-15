@@ -9,10 +9,9 @@ function start(route, handle){
 			var pathname = url.parse(request.url).pathname;
 			writeToConsoleWrapper(writeToConsole, "Request for " + pathname + " received");
 
-			route(handle, pathname);
-
 			response.writeHead(200, {"Content-Type": "text/plain"});
-			response.write("Hello World");
+			response.write(route(handle, pathname));
+			//response.write("Hello World");
 		}
 			response.end();
 	}
