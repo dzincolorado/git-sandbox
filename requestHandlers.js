@@ -12,15 +12,18 @@ function start(request, response) {
 
 	var content = 'empty';
 	exec("ls -lah", function(error, stdout, stderr){
-		content = stdout;
+		response.writeHead(200, {"Content-Type":"text/plain"});
+		response.write(stdout);
+		response.write("test");
+		response.end();
 	});
-
-	return content;
 }
 
 function upload(request, response) {
 	console.log("hanlding upload request");
-	return "Uploading...";
+	response.writeHead(200, {"Content-Type":"text/plain"});
+	response.write("Uploading...");
+	response.end();
 }
 
 exports.start = start;

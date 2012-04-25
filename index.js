@@ -1,10 +1,11 @@
-var server = require("./server");
-var router = require("./router");
 var requestHandlers = require('./requestHandlers');
+var express = require('express')
 
-var handle = {};
-handle["/"] = requestHandlers.start;
-handle["/start"] = requestHandlers.start;
-handle["/upload"] = requestHandlers.upload;
+var app = module.exports = express.createServer();
 
-server.start(router.route, handle);
+app.get('/', requestHandlers.start);
+app.get('/start', requestHandlers.start);
+app.get('/upload', requestHandlers.upload);
+app.listen(8888);
+
+console.log("Now listening on " + app.address().port);
