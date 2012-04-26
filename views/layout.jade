@@ -1,11 +1,11 @@
-doctype html
+doctype 5
 html
 	head
-		title Test jade view engine
-		style
-			body {
-				padding: 50px;
-				font: 14px/1.5 solid helvetica, arial, sans-serif;
-			}
+		title TimeLoop #{title}
+
+		link(rel='stylesheet', href='/styles/bootstrap.css')
+		link(rel='stylesheet', href='/styles/bootstrap-responsive.css')
+
+		script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
 	body
-		block content
+		block mainContent

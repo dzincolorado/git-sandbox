@@ -1,9 +1,11 @@
 var exec = require('child_process').exec;
 
+//var scripts = ["../assets/styles/bootstrap.css", "../assets/styles/bootstrap-responsive.css"];
+
 function start(request, response) {
 	console.log("handling start request");
 
-	response.render('start');
+	response.render('start', {title : "Start Upload", content : "Test this upload, sir.", /*scripts:scripts*/ });
 
 }
 
