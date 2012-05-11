@@ -1,5 +1,6 @@
 var requestHandlers = require('./requestHandlers');
 var express = require('express')
+var RedisStore = require('connect-redis')(express);
 
 var app = module.exports = express.createServer();
 
@@ -12,6 +13,8 @@ app.set('view engine', 'jade');
 app.set('view options', {layout: false})
 app.use(express.bodyParser());
 app.use(express.static(__dirname + '/assets'));
+app.use(express.cookieParser());
+app.use(express.session({secret: "my secret passphrase", store: new RedisStore}));
 
 app.listen(8888);
 
