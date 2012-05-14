@@ -7,6 +7,7 @@ var querystring = require('querystring');
 function HandleDataChunks(request, response)
 {
 	request.setEncoding('utf8');
+	console.log("inside handle data chunks");
 	
 	var postData = "";
 	request.addListener("data", function(postDataChunk) {

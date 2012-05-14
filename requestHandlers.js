@@ -11,7 +11,7 @@ function start(request, response) {
 
 }
 
-function upload(request, response) {
+function upload(request, response, next) {
 	console.log("hanlding upload request");
 	/*
 	response.writeHead(200, {"Content-Type":"text/plain"});
@@ -19,7 +19,8 @@ function upload(request, response) {
 	response.end();
 	*/
 	
-	var postData = dataChunkHandler(request, response);
+	var postData = request.body.txttest;//querystring.parse(postData).text;
+	
 	response.render('start', {title: "Uploaded content", content: "You've sent: " + postData})
 }
 
