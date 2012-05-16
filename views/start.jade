@@ -6,10 +6,8 @@ block mainContent
 	form(action='/upload')
 		input(name="txt[title]")
 		br
-		input(name="txttest", id="txttest")
-		br
 		textarea(name="txt[upload]", rows="20", cols="60")
 		br
-		input(name='_method', value='PUT', type='hidden')
+		input(name='_method', value='POST', type='hidden')
 		input(type="submit", value="Submit text", class="input-xlarge")
 	

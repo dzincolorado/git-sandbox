@@ -18,10 +18,10 @@ function upload(request, response, next) {
 	response.write("Uploading...");
 	response.end();
 	*/
-	
-	var postData = request.body.txttest;//querystring.parse(postData).text;
-	
-	response.render('start', {title: "Uploaded content", content: "You've sent: " + postData})
+	var postData = request.param('txt', null);//querystring.parse(postData).text;;
+	console.log(postData);
+	response.render('start', {title: "Uploaded content", 
+		content: "You've sent: {T: '" + postData['title'] + "', U: '" + postData['upload'] + "'}"});
 }
 
 exports.start = start;
