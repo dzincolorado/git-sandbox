@@ -1,5 +1,6 @@
 var exec = require('child_process').exec;
 var dataChunkHandler = require('./DataChunkHandler');
+var fs = require('fs');
 
 //var scripts = ["../assets/styles/bootstrap.css", "../assets/styles/bootstrap-responsive.css"];
 
@@ -20,9 +21,26 @@ function upload(request, response, next) {
 	*/
 	var postData = request.param('txt', null);//querystring.parse(postData).text;;
 	console.log(postData);
-	response.render('start', {title: "Uploaded content", 
+	response.render('upload', {title: "Uploaded content", 
 		content: "You've sent: {T: '" + postData['title'] + "', U: '" + postData['upload'] + "'}"});
+}
+
+function show(request, response){
+	console.log('Show is being handled');
+	fs.readFile('/tmp/test.png', 'binary', function(error, file){
+		if(error){
+			response.render('show', {errorMessage: "an error occurred uploading your image"});
+		}
+		else{
+			//TODO: need to figure out how to render the image in the template.
+			//response.render('show', file);
+			response.writeHead('Content-Type', 'image/png');
+			response.write(file, 'binary');
+			response.end();
+		}
+	});
 }
 
 exports.start = start;
 exports.upload = upload;
+exports.show = show;

@@ -16,6 +16,7 @@ app.use(express.session({secret: "my secret passphrase", store: new RedisStore})
 app.get('/', requestHandlers.start);
 app.get('/start', requestHandlers.start);
 app.get('/upload', requestHandlers.upload);
+app.get('/show', requestHandlers.show);
 
 /*
  * var server = http.createServer(function(req, res) {
