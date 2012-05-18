@@ -3,11 +3,11 @@ extends layout
 block mainContent
 	h2 Upload
 	p= content
-	form(action='/upload')
-		input(name="txt[title]")
+	form(action='/upload', method='post')
+		input(name="txtTitle")
 		br
-		textarea(name="txt[upload]", rows="20", cols="60")
+		input(type='file', name='flUpload', multiple='multiple')
 		br
 		input(name='_method', value='POST', type='hidden')
-		input(type="submit", value="Submit text", class="input-xlarge")
+		input(type="submit", value="Upload File", class="input-xlarge")
 	

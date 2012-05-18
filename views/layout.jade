@@ -1,12 +1,12 @@
 doctype 5
 html
 	head
-		title TimeLoop #{title}
+		title #{title}
 
 		link(rel='stylesheet', href='/styles/bootstrap.css')
 		link(rel='stylesheet', href='/styles/bootstrap-responsive.css')
 
 		script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
 	body
+		div(class='alert alert-#{alertType}') #{alertMessage}
 		block mainContent
-		div(class='alert alert-error')= errorMessage
