@@ -3,7 +3,7 @@ extends layout
 block mainContent
 	h2 Upload
 	p= content
-	form(action='/upload', method='post')
+	form(action='/upload', method='post', enctype='multipart/form-data')
 		input(name="txtTitle")
 		br
 		input(type='file', name='flUpload', multiple='multiple')

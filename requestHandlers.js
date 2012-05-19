@@ -14,29 +14,16 @@ function start(request, response) {
 }
 
 function upload(request, response, next) {
-	console.log("hanlding upload request");
+	console.log("handling upload request");
 
-	var form = new formidable.IncomingForm();
-	console.log("parsing");
-	form.uploadDir = '/tmp';
-	form.keepExtensions = true;
-	
-	//TODO: form.parse doesn't seem to fire.  Need to resolve.
-	form.parse(request, function(err, fields, files){
-		console.log("parse complete");
-		fs.rename(files.upload.path, imageLocation, function(err){
-			if(err){
-				fs.unlink(imageLocation);
-				fs.rename(files.upload.path, imageLocation);
-			}
-		});
-	});
-	
+	fs.rename(request.files.flUpload.path, imageLocation);
+
 	response.render('upload', {title: "Uploaded Image", 
-		content: "You've sent: {T: '" + request.body.txtTitle + "', U: '" + request.body.flUpload + "'}",
+		content: "You've sent: {T: '" + request.body.txtTitle + "', U: '" + request.files.flUpload.name + "'}",
 		alertMessage : "Successfully uploaded!",
 		alertType: "success",
 		imageSource: "/show"});
+
 }
 
 function show(request, response){
@@ -44,6 +31,7 @@ function show(request, response){
 	fs.readFile(imageLocation, 'binary', function(error, file){
 		if(error){
 			response.render('show', {title: "", alertMessage: "an error occurred uploading your image", alertType: "error"});
+			console.log("error loading file");
 		}
 		else{
 			//TODO: need to figure out how to render the image in the template.
